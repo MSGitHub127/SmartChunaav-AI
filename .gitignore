@@ -1,0 +1,17 @@
+# Credentials and Environment
+.env
+GOOGLE_API_KEY
+*.key
+
+# Python
+__pycache__/
+venv/
+*.py[cod]
+
+# Node / Frontend
+node_modules/
+dist/
+.eslintcache
+
+# Cloud Run / Deployment
+.gcloud/

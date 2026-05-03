@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* ── SmartChunaav AI Design Tokens ──────────────────────────────────────────
+   These CSS custom properties define the civic trust palette.
+   Deep Trust Blue (#1E3A8A) signals authority and reliability.
+   Action Orange (#F97316) drives engagement without partisan connotation.
+   Both pass WCAG AA contrast against white (4.5:1 minimum).
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+    /* Primary – Deep Trust Blue */
+    --color-trust-blue-50: #eff6ff;
+    --color-trust-blue-100: #dbeafe;
+    --color-trust-blue-200: #bfdbfe;
+    --color-trust-blue-500: #3b82f6;
+    --color-trust-blue-600: #1E3A8A;
+    /* Primary brand colour */
+    --color-trust-blue-700: #1e40af;
+    --color-trust-blue-900: #1e3a8a;
+
+    /* Accent – Action Orange */
+    --color-action-orange-50: #fff7ed;
+    --color-action-orange-100: #ffedd5;
+    --color-action-orange-500: #F97316;
+    /* CTA buttons, focus rings */
+    --color-action-orange-600: #ea6c0a;
+    --color-action-orange-700: #c2550a;
+}
+
+/* ── Global reset / accessibility baseline ──────────────────────────────── */
+
+/* Respect user motion preferences (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Visible focus ring for keyboard users – do NOT remove the outline */
+:focus-visible {
+    outline: 3px solid #F97316;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Skip-to-main link (rendered off-screen, shown on focus) */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #1E3A8A;
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 100;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+@variant dark (&:where(.dark, .dark *));

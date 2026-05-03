@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+google-genai
+pydantic
+pydantic-settings
+pytest
+pytest-asyncio
+httpx
+geopy
+gTTS

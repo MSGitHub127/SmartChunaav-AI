@@ -1,0 +1,58 @@
+name: SmartChunaav AI – CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  backend-tests:
+    name: Backend – Pytest
+    runs-on: ubuntu-latest
+
+    env:
+      # Dummy values so pydantic-settings can initialise in CI without real secrets.
+      GCP_PROJECT: ci-test-project
+      GCP_LOCATION: global
+      GEMINI_MODEL: gemini-2.0-flash
+      CORS_ORIGINS: http://localhost:3000
+      APP_ENV: development
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Run Pytest with verbose output
+        run: |
+          cd backend
+          pytest test_main.py -v --tb=short
+
+  frontend-lint:
+    name: Frontend – ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Run ESLint
+        run: |
+          cd frontend
+          npm run lint
