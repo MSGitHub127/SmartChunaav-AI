@@ -40,6 +40,17 @@ class Settings(BaseSettings):
         alias="GOOGLE_API_KEY",
         description="Gemini API Key from Google AI Studio."
     )
+    # Add these inside the Settings class in config.py
+    google_maps_api_key: str = Field(
+        default="", 
+        alias="GOOGLE_MAPS_API_KEY",
+        description="API Key for Google Maps Geocoding & Static Maps."
+    )
+    youtube_api_key: str = Field(
+        default="", 
+        alias="YOUTUBE_API_KEY",
+        description="API Key for YouTube Data API v3."
+    )
     gcp_location: str = Field(
         default="global",
         alias="GCP_LOCATION",

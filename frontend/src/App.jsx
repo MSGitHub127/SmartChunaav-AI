@@ -216,7 +216,25 @@ function App() {
       setIsSubmitting(false)
     }
   }
+  
+// Add this helper function inside your App component
+  const getGoogleCalendarUrl = (electionInfo) => {
+  const date = electionInfo.next_election_date.replace(/-/g, '');
+  const title = encodeURIComponent(`Voting Day: ${electionInfo.location_identified}`);
+  const details = encodeURIComponent("Don't forget to vote! Check SmartChunaav AI for procedures.");
+  
+  // Formats: YYYYMMDD/YYYYMMDD
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${date}/${date}&details=${details}`;
+  };
 
+// Inside your JSX (where you display the election results):
+  <a 
+     href={getGoogleCalendarUrl(data)} 
+     target="_blank" 
+     className="bg-[#F97316] text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-[#EA580C] transition-colors"
+  >
+  📅 Add to Google Calendar
+  </a>
   const handleSaveToCalendar = (dateStr) => {
     if (!dateStr || dateStr === 'Unknown') return
     const d = new Date(dateStr)

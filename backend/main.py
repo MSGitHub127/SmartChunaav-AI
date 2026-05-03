@@ -159,7 +159,12 @@ def _text_to_audio_b64(text: str, lang_code: str) -> str | None:
     except Exception as exc:
         print(f"[tts] gTTS error: {exc}")
         return None
-
+      
+def get_youtube_thumbnail(video_url: str) -> str:
+   """Enriches Gemini's YouTube links with actual thumbnails via YouTube API."""
+    # Extract video ID from URL
+    video_id = video_url.split("v=")[-1]
+    return f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
 
 # ── Endpoints ─────────────────────────────────────────────────────────────────
 
